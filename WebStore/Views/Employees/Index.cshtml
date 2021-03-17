@@ -20,7 +20,9 @@
             @foreach (var employee in Model)
             {
                 <tr>
-                    <td>@employee.id</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@employee.id">@employee.id</a>
+                    </td>
                     <td>@employee.LastName</td>
                     <td>@employee.FirstName</td>
                     <td>@employee.Patronymic</td>

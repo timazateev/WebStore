@@ -3,18 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Data;
 using WebStore.Models;
 
 namespace WebStore.Controllers
 {
     public class EmployeesController : Controller
     {
-        private static readonly List<Employee> __Employees = new()
+        private readonly List<Employee> _Employees;
+        public EmployeesController() 
         {
-            new Employee { id = 1, LastName = "Ivanov", FirstName = "Ivan", Patronymic = "Ivanovich", Age = 22 },
-            new Employee { id = 2, LastName = "Petrov", FirstName = "Petr", Patronymic = "Petrovich", Age = 21 },
-            new Employee { id = 3, LastName = "Timov", FirstName = "Tim", Patronymic = "Timovich", Age = 32 },
-        };
-        public IActionResult Index() => View(__Employees);
+            _Employees = TestData.Employees;
+        }
+
+        public IActionResult Index() => View(_Employees);
+
+        public IActionResult Details(int id)
+        {
+            var empluyee = _Employees.FirstOrDefault(e => e.id ==id);
+            if (empluyee is null)
+                return NotFound();
+
+            return View(empluyee);
+        }
     }
 }
