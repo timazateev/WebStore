@@ -1,15 +1,14 @@
 ﻿@model IEnumerable<WebStore.Models.Employee>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Employees</title>
-</head>
-<body>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
     <h3>Employees</h3>
-    <table>
+    <table class="table">
         <thead>
         <th>#</th>
         <th>Surname</th>
@@ -34,5 +33,6 @@
     <p>
         <a href="~/">Home</a>
     </p>
-</body>
-</html>
+
+</div>
+
