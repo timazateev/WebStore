@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Conventions;
 using WebStore.Models;
 
 namespace WebStore.Controllers
-{
+{   
+    [ActionDescription("Main Controller")]
     public class HomeController : Controller
     {
-
+        [ActionDescription("Main Action")]
         public IActionResult Index() => View();
         public IActionResult NotFound() => View();
         public IActionResult Blog() => View();

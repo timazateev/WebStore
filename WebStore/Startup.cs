@@ -8,19 +8,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Conventions;
 
 namespace WebStore
 {
-    public class Startup
+    public record Startup(IConfiguration Configuration)
     {
-        private IConfiguration Configuration { get; }
-        public Startup(IConfiguration Configuration)
-        {
-            this.Configuration = Configuration;
-        }
+        //private IConfiguration Configuration { get; }
+        //public Startup(IConfiguration Configuration)
+        //{
+        //    this.Configuration = Configuration;
+        //}
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            //services AddMvc();
+            
+            services
+                .AddControllersWithViews(
+                mvc =>
+                {
+                    //mvc.Conventions.Add(new ActionDescriptionAttribute("base desc"));
+                    mvc.Conventions.Add(new ApplicationConvention());
+                })
+                .AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
