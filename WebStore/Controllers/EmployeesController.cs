@@ -7,7 +7,8 @@ using WebStore.Data;
 using WebStore.Models;
 
 namespace WebStore.Controllers
-{
+{   
+    //[Route("Staff")]
     public class EmployeesController : Controller
     {
         private readonly List<Employee> _Employees;
@@ -16,8 +17,10 @@ namespace WebStore.Controllers
             _Employees = TestData.Employees;
         }
 
+        //[Route("All")]
         public IActionResult Index() => View(_Employees);
 
+        //[Route("info-(id-{id})")]  // cheange address for employee
         public IActionResult Details(int id)
         {
             var empluyee = _Employees.FirstOrDefault(e => e.id ==id);

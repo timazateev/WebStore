@@ -44,6 +44,9 @@ namespace WebStore
 
             app.UseRouting();
 
+            //app.Map(); owen PO adding.
+            //app.Use(); delegate or class in conveyor
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/Greetings", async context =>

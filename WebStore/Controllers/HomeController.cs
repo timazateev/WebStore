@@ -15,6 +15,7 @@ namespace WebStore.Controllers
         [ActionDescription("Main Action")]
         [AddHeader("Text","Value")]
         public IActionResult Index() => View();
+        public IActionResult Throw() => throw new ApplicationException("Test error!");
         public IActionResult NotFound() => View();
         public IActionResult Blog() => View();
         public IActionResult BlogSingle() => View();
