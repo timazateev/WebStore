@@ -36,6 +36,7 @@ namespace WebStore.Controllers
             return View(empluyee);
         }
 
+        public IActionResult Create() => View("Edit", new EmployeeViewModel());
         public IActionResult Edit(int? id)
         {
 
