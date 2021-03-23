@@ -48,14 +48,20 @@ namespace WebStore.Controllers
             if (employee is null)
                 return NotFound();
 
-            return View(new EmployeeViewModel
+            if (ModelState.IsValid)
             {
-                id = employee.id,
-                LastName = employee.LastName,
-                Name = employee.FirstName,
-                Patronymic = employee.Patronymic,
-                Age = employee.Age
-            });
+
+                return View(new EmployeeViewModel
+                {
+                    id = employee.id,
+                    LastName = employee.LastName,
+                    Name = employee.FirstName,
+                    Patronymic = employee.Patronymic,
+                    Age = employee.Age
+                });
+            }
+            else
+                return View("Edit", new EmployeeViewModel());
 
         }
 
@@ -70,13 +76,18 @@ namespace WebStore.Controllers
                 Patronymic = model.Patronymic,
                 Age = model.Age
             };
-
-            if (employee.id == 0)
-                _EmployeesData.Add(employee);
+            if (ModelState.IsValid) 
+            {
+                if (employee.id == 0)
+                    _EmployeesData.Add(employee);
+                else
+                    _EmployeesData.Update(employee);
+                return RedirectToAction("Index");
+            }
             else
-                _EmployeesData.Update(employee);
+                return View(model);
 
-            return RedirectToAction("Index");
+
         }
 
         public IActionResult Delete(int id)
