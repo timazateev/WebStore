@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebStore.ViewModels.SectionViewModel>
+﻿@model IEnumerable<SectionViewModel>
 
 <h2>Category</h2>
 <div class="panel-group category-products" id="accordian">
@@ -10,7 +10,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordian" href="@parent_section.GetHashCode()">
+                        <a data-toggle="collapse" data-parent="#accordian" href="#@parent_section.GetHashCode()">
                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                             @parent_section.Name
                         </a>

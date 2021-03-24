@@ -23,15 +23,16 @@ namespace WebStore.Data
             new Section {id = 3, Name = "Under Armor", Order = 1, ParentId = 1 },
             new Section {id = 4, Name = "Test", Order = 2, ParentId = 1 },
             new Section {id = 5, Name = "For Mans", Order = 1 },
-            new Section {id = 6, Name = "For Mans Shorts", Order = 1, ParentId = 5 },
-            new Section {id = 7, Name = "For Mans Shoes", Order = 0, ParentId =5 }
+            new Section {id = 6, Name = "For Man Shorts", Order = 1, ParentId = 5 },
+            new Section {id = 7, Name = "For Man Shoes", Order = 0, ParentId =5 },
+            new Section {id = 8, Name = "For Woman Shoes", Order = 0},
         };
 
         public static IEnumerable<Brand> Brands { get; } = new[]
         {
             new Brand {id = 1, Name = "Acne", Order = 0  },
             new Brand {id = 2, Name = "Grune Erde", Order = 1  },
-            new Brand {id = 3, Name = "Aaaa1", Order = 2  }
+            new Brand {id = 3, Name = "Aaaa1", Order = 2  },
         };
     }
 }
