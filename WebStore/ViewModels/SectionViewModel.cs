@@ -11,7 +11,6 @@ namespace WebStore.ViewModels
         public string Name { get; set; }
         public int Order { get; set; }
         public SectionViewModel Parent { get; set; }
-        public List<SectionViewModel> ChildSections { get; set; }
-
+        public List<SectionViewModel> ChildSections { get; set; } = new();
     }
 }
