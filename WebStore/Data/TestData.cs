@@ -34,5 +34,14 @@ namespace WebStore.Data
             new Brand {id = 2, Name = "Grune Erde", Order = 1  },
             new Brand {id = 3, Name = "Aaaa1", Order = 2  },
         };
+
+        public static IEnumerable<Product> Products { get; } = new[]
+        {
+        new Product() { id = 1, Name = "Easy Polo Black Edition", Price = 1025, ImageUrl = "product1.jpg", Order = 0, SectionId = 2, BrandId = 1},
+        new Product() { id = 1, Name = "Some stort item", Price = 250, ImageUrl = "product2.jpg", Order = 1, SectionId = 2, BrandId = 1},
+        new Product() { id = 1, Name = "Dress item", Price = 3025, ImageUrl = "product3.jpg", Order = 2, SectionId = 2, BrandId = 2},
+        new Product() { id = 1, Name = "Edition item", Price = 25, ImageUrl = "product4.jpg", Order = 3, SectionId = 2, BrandId = 2},
+        new Product() { id = 1, Name = "product item 5", Price = 125, ImageUrl = "product5.jpg", Order = 4, SectionId = 2, BrandId = 2},
+        };
     }
 }
