@@ -8,19 +8,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Conventions;
+using WebStore.Infrastructure.Services;
+using WebStore.Infrastructure.Services.Interfaces;
 
 namespace WebStore
 {
-    public class Startup
+    public record Startup(IConfiguration Configuration)
     {
-        private IConfiguration Configuration { get; }
-        public Startup(IConfiguration Configuration)
-        {
-            this.Configuration = Configuration;
-        }
+        //private IConfiguration Configuration { get; }
+        //public Startup(IConfiguration Configuration)
+        //{
+        //    this.Configuration = Configuration;
+        //}
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
+            services.AddTransient<IProductData, InMemoryProductData>();
+
+            //services AddMvc();
+
+            services
+                .AddControllersWithViews(
+                mvc =>
+                {
+                    //mvc.Conventions.Add(new ActionDescriptionAttribute("base desc"));
+                    mvc.Conventions.Add(new ApplicationConvention());
+                })
+                .AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -33,6 +48,9 @@ namespace WebStore
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            //app.Map(); owen PO adding.
+            //app.Use(); delegate or class in conveyor
 
             app.UseEndpoints(endpoints =>
             {

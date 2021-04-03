@@ -3,14 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Infrastructure.Conventions;
+using WebStore.Infrastructure.Filters;
 using WebStore.Models;
 
 namespace WebStore.Controllers
-{
+{   
+    [ActionDescription("Main Controller")]
     public class HomeController : Controller
     {
-
+        [ActionDescription("Main Action")]
+        [AddHeader("Text","Value")]
         public IActionResult Index() => View();
+        public IActionResult Throw() => throw new ApplicationException("Test error!");
         public IActionResult NotFound() => View();
         public IActionResult Blog() => View();
         public IActionResult BlogSingle() => View();
