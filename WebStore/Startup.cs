@@ -29,7 +29,10 @@ namespace WebStore
             services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
             services.AddTransient<IProductData, InMemoryProductData>();
             services.AddDbContext<WebStoreContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                //.EnableSensitiveDataLogging(true) // for debugging 
+                //.LogTo(Console.WriteLine)    
+                );
 
             //services AddMvc();
 
