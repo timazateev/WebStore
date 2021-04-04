@@ -15,6 +15,6 @@ namespace WebStoreDomain.Entities
         [ForeignKey(nameof(ParentId))]
         public Section Parent { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }
