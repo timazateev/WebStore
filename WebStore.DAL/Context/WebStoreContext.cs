@@ -1,14 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebStoreDomain.Entities;
+using WebStoreDomain.Entities.Identity;
 
 namespace WebStore.DAL.Context
 {
-    public class WebStoreContext : DbContext
+    public class WebStoreContext : IdentityDbContext<User, Role, string>
     {
         public WebStoreContext(DbContextOptions<WebStoreContext> options) : base(options)
         { 
