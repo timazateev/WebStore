@@ -44,8 +44,38 @@ namespace WebStore.Controllers
             return View(Model);
         }
         #endregion
+        #region Login
+        public IActionResult Login(string ReturnUrl) => View(new LoginViewModel { ReturnUrl = ReturnUrl });
 
-        public IActionResult Login() => View();
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel Model)
+        {
+            if (!ModelState.IsValid) return View(Model);
+
+            var login_result = await _signInManager.PasswordSignInAsync(
+                Model.UserName,
+                Model.Password,
+                Model.RememberMe,
+#if DEBUG
+                false
+#else
+                true
+#endif
+
+                );
+            if (login_result.Succeeded)
+            {
+                //if (Url.IsLocalUrl(Model.ReturnUrl))
+                //    return Redirect(Model.ReturnUrl);
+                //return RedirectToAction("Index", "Home");
+                return LocalRedirect(Model.ReturnUrl);
+            }
+
+            ModelState.AddModelError("", "Incorrect user name or password!");
+            return View(Model);
+        }
+        #endregion
+
         public IActionResult Logout() => RedirectToAction("Index", "Home");
         public IActionResult AccessDenied() => View();
 
