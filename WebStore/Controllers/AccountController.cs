@@ -68,7 +68,7 @@ namespace WebStore.Controllers
                 //if (Url.IsLocalUrl(Model.ReturnUrl))
                 //    return Redirect(Model.ReturnUrl);
                 //return RedirectToAction("Index", "Home");
-                return LocalRedirect(Model.ReturnUrl);
+                return LocalRedirect(Model.ReturnUrl ?? "/");
             }
 
             ModelState.AddModelError("", "Incorrect user name or password!");
@@ -80,9 +80,12 @@ namespace WebStore.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
-        } 
+        }
 
-        public IActionResult AccessDenied() => View();
-
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            ViewBag.ReturnUrl = ReturnUrl;
+            return View();
+        }
     }
 }
