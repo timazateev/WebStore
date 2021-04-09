@@ -1,16 +1,19 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using WebStore.DAL.Context;
 using WebStore.Infrastructure.Conventions;
-using WebStore.Infrastructure.Services;
 using WebStore.Infrastructure.Services.Interfaces;
+using WebStore.Data;
+using WebStore.Infrastructure.Services.InMemory;
+using WebStore.Infrastructure.Services.InSQL;
+using WebStoreDomain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace WebStore
 {
@@ -24,7 +27,50 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
-            services.AddTransient<IProductData, InMemoryProductData>();
+            //services.AddTransient<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
+            services.AddDbContext<WebStoreContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                //.EnableSensitiveDataLogging(true) // for debugging 
+                //.LogTo(Console.WriteLine)    
+                );
+
+            services.AddTransient<WebStoreDbInitializer>();
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebStoreContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(opt =>
+                {
+#if DEBUG                    
+                    opt.Password.RequiredLength = 3;
+                    opt.Password.RequireDigit = false;
+                    opt.Password.RequireLowercase = false;
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequiredUniqueChars = 3;
+#endif
+                    opt.User.RequireUniqueEmail = false;
+                    opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    opt.Lockout.AllowedForNewUsers = false;
+                    opt.Lockout.MaxFailedAccessAttempts = 10;
+                    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                });
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.Name = "GB.WebStore";
+                opt.Cookie.HttpOnly = true;
+                opt.ExpireTimeSpan = TimeSpan.FromDays(10);
+
+                opt.LoginPath = "/Account/Login";
+                opt.LogoutPath = "/Account/Logout";
+                opt.AccessDeniedPath = "/Account/AccessDenied";
+
+                opt.SlidingExpiration = true;
+            }
+            );
 
             //services AddMvc();
 
@@ -38,8 +84,10 @@ namespace WebStore
                 .AddRazorRuntimeCompilation();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDbInitializer db)
         {
+            db.Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -48,6 +96,9 @@ namespace WebStore
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             //app.Map(); owen PO adding.
             //app.Use(); delegate or class in conveyor
