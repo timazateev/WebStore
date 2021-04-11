@@ -13,8 +13,8 @@ namespace WebStore.Data
     public class WebStoreDbInitializer
     {
         private readonly WebStoreContext _db;
-        private readonly UserManager<User> _UserManager;
-        private readonly RoleManager<Role> _RoleManager;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly ILogger<WebStoreDbInitializer> _Logger;
 
         public WebStoreDbInitializer(
@@ -24,8 +24,8 @@ namespace WebStore.Data
             ILogger<WebStoreDbInitializer> Logger)
         {
             _db = db;
-            _UserManager = UserManager;
-            _RoleManager = RoleManager;
+            _userManager = UserManager;
+            _roleManager = RoleManager;
             _Logger = Logger;
         }
 
@@ -149,10 +149,10 @@ namespace WebStore.Data
             _Logger.LogInformation("DB Initializing Identity system");
             async Task CheckRole(string RoleName)
             {
-                if (!await _RoleManager.RoleExistsAsync(RoleName))
+                if (!await _roleManager.RoleExistsAsync(RoleName))
                 {
                     _Logger.LogInformation("Role {0} is not exists. Creating...", RoleName);
-                    await _RoleManager.CreateAsync(new Role { Name = RoleName });
+                    await _roleManager.CreateAsync(new Role { Name = RoleName });
                     _Logger.LogInformation("Role {0} Created", RoleName);
                 }
             }
@@ -160,7 +160,7 @@ namespace WebStore.Data
             await CheckRole(Role.Administrators);
             await CheckRole(Role.Users);
 
-            if (await _UserManager.FindByEmailAsync(User.Administrator) is null)
+            if (await _userManager.FindByEmailAsync(User.Administrator) is null)
             {
                 _Logger.LogInformation("User administratoir does not exist. Creating...");
                 var admin = new User
@@ -168,11 +168,11 @@ namespace WebStore.Data
                     UserName = User.Administrator
                 };
 
-                var creation_result = await _UserManager.CreateAsync(admin, User.DefaultAdminPassword);
+                var creation_result = await _userManager.CreateAsync(admin, User.DefaultAdminPassword);
                 if (creation_result.Succeeded)
                 {
                     _Logger.LogInformation("User administratoir created");
-                    await _UserManager.AddToRoleAsync(admin, Role.Administrators);
+                    await _userManager.AddToRoleAsync(admin, Role.Administrators);
                     _Logger.LogInformation("User administratoir granted with the role");
                 }
                 else
@@ -180,7 +180,7 @@ namespace WebStore.Data
                     var errors = creation_result.Errors.Select(e => e.Description);
                     _Logger.LogError("User administratoir created with error {0}", String.Join(",", errors));
                     throw new InvalidOperationException($"Error during administrator user creation: {String.Join(",", errors)}");
-                    
+
                 }
             }
 
