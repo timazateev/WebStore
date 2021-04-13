@@ -1,4 +1,5 @@
-﻿@model WebStore.Models.Employee
+﻿@using WebStoreDomain.Entities.Identity
+@model WebStore.Models.Employee
 
 @{
     ViewData["Title"] = $"Employee id:{Model.id}";
@@ -43,11 +44,12 @@
             </dd>
         </dl>
     </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.id" class="btn btn-default"> Edit employee </a> |
-        <a asp-action="Delete" asp-route-id="@Model.id" class="btn btn-danger"> Delete employee </a> |
-        <a asp-action="Index"  class="btn btn-info">Back to List</a>
-
-    </div>
-
+    @if (User.IsInRole(Role.Administrators))
+    {
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.id" class="btn btn-default"> Edit employee </a> |
+            <a asp-action="Delete" asp-route-id="@Model.id" class="btn btn-danger"> Delete employee </a> |
+        </div>
+    }
+    <a asp-action="Index" class="btn btn-info">Back to List</a>
 </div>
