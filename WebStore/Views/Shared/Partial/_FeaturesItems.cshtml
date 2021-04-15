@@ -16,7 +16,11 @@
                         <p>
                             <a asp-controller="Catalog" asp-action="Details" asp-route-id="@product.id"></a>
                         </p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@product.id"
+                           class="btn btn-default add-to-cart">
+                            <i class="fa fa-shopping-cart">
+                            </i>Add to cart
+                        </a>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
@@ -25,7 +29,10 @@
                                 <a asp-controller="Catalog" asp-action="Details" asp-route-id="@product.id"></a>
                             </p>
                             <p>@product.Name</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@product.id"
+                               class="btn btn-default add-to-cart">
+                                <i class="fa fa-shopping-cart"></i>Add to cart
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 
 namespace WebStore.Infrastructure.Services.Interfaces
 {
-    interface ICartServices
+    public interface ICartServices
     {
         void Add(int id);
 

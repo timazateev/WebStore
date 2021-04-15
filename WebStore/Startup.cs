@@ -14,6 +14,7 @@ using WebStore.Infrastructure.Services.InSQL;
 using WebStoreDomain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
+using WebStore.Infrastructure.Services.InCookies;
 
 namespace WebStore
 {
@@ -29,6 +30,9 @@ namespace WebStore
             services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
             //services.AddTransient<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
+            
+            services.AddScoped<ICartServices, InCookiesCartService>();
+            
             services.AddDbContext<WebStoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 //.EnableSensitiveDataLogging(true) // for debugging 
