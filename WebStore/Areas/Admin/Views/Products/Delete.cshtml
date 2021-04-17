@@ -1,11 +1,13 @@
-﻿@model Product
+﻿@using WebStoreDomain.Entities
+
+@model Product
 @{
-    ViewBag.Title = $"Удаление {Model.Name}";
+    ViewBag.Title = $"Delete {Model.Name}";
 }
 
 <p>@ViewBag.Title</p>
 
 <p>
-    <a asp-action="Index">К списку</a>
+    <a asp-action="Index">Back to the list</a>
 </p>
 © 202
