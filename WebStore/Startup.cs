@@ -32,6 +32,7 @@ namespace WebStore
             services.AddScoped<IProductData, SqlProductData>();
 
             services.AddScoped<ICartServices, InCookiesCartService>();
+            services.AddScoped<IOrderService, SqlOrderService>();
 
             services.AddDbContext<WebStoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
