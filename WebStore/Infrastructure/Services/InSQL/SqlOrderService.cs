@@ -23,7 +23,7 @@ namespace WebStore.Infrastructure.Services.InSQL
             _userManager = UserManager;
         }
 
-        public async Task<IEnumerable<Order>> GetUserOrder(string UserName) => await _db.Orders
+        public async Task<IEnumerable<Order>> GetUserOrders(string UserName) => await _db.Orders
         .Include(order => order.User)
         .Include(Order => Order.Items)
         .Where(order => order.User.UserName == UserName)
