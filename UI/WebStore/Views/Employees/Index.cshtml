@@ -1,0 +1,68 @@
+﻿@using WebStore.Domain.Entities.Identity
+@model IEnumerable<WebStore.Models.Employee>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+    <h3>Employees</h3>
+
+    <hr />
+
+    <a asp-action="Edit" class="btn btn-primary">Add new employee</a>
+    <a asp-action="Create" class="btn btn-primary">Create new employee</a>
+
+    <table class="table">
+        <thead>
+        <th>#</th>
+        <th>Surname</th>
+        <th>FirstName</th>
+        <th>Patronymic</th>
+        <th>Age</th>
+        @if (User.IsInRole(Role.Administrators))
+        {
+            <th></th>
+            <th></th>
+        }
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@employee.id">@employee.id</a>
+                    </td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.Patronymic</td>
+                    <td>@employee.Age</td>
+
+                    @if (User.IsInRole(Role.Administrators))
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@employee.id">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <form asp-action="DeleteConfirmed" asp-route-id="@employee.id">
+                                <button type="submit">
+                                    <i class="fa fa-trash-o text-danger"></i>
+                                </button>
+                            </form>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <a asp-controller="Home" asp-action="Index">Home</a>
+    </p>
+
+</div>
+
