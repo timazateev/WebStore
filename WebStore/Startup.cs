@@ -30,9 +30,10 @@ namespace WebStore
             services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
             //services.AddTransient<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
-            
+
             services.AddScoped<ICartServices, InCookiesCartService>();
-            
+            services.AddScoped<IOrderService, SqlOrderService>();
+
             services.AddDbContext<WebStoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 //.EnableSensitiveDataLogging(true) // for debugging 
@@ -113,6 +114,11 @@ namespace WebStore
                 {
                     await context.Response.WriteAsync(Configuration["Greetings"]);
                 });
+
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
 
                 endpoints.MapControllerRoute(
                     "default",
