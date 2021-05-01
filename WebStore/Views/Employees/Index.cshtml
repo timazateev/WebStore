@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebStore.Models.Employee>
+﻿@using WebStoreDomain.Entities.Identity
+@model IEnumerable<WebStore.Models.Employee>
 
 
 @{
@@ -21,7 +22,11 @@
         <th>FirstName</th>
         <th>Patronymic</th>
         <th>Age</th>
-        <th></th>
+        @if (User.IsInRole(Role.Administrators))
+        {
+            <th></th>
+            <th></th>
+        }
         </thead>
         <tbody>
             @foreach (var employee in Model)
@@ -34,18 +39,22 @@
                     <td>@employee.FirstName</td>
                     <td>@employee.Patronymic</td>
                     <td>@employee.Age</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@employee.id">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <form asp-action="DeleteConfirmed" asp-route-id="@employee.id">
-                            <button type="submit">
-                                <i class="fa fa-trash-o text-danger"></i>
-                            </button>
-                        </form>
-                    </td>
+
+                    @if (User.IsInRole(Role.Administrators))
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@employee.id">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <form asp-action="DeleteConfirmed" asp-route-id="@employee.id">
+                                <button type="submit">
+                                    <i class="fa fa-trash-o text-danger"></i>
+                                </button>
+                            </form>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>
