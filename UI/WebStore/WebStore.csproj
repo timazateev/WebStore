@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebStore.DAL\WebStore.DAL.csproj" />
-    <ProjectReference Include="..\WebStoreDomain\WebStoreDomain.csproj" />
+    <ProjectReference Include="..\..\Common\WebStoreDomain\WebStoreDomain.csproj" />
+    <ProjectReference Include="..\..\Services\WebStore.DAL\WebStore.DAL.csproj" />
   </ItemGroup>
 
 </Project>
