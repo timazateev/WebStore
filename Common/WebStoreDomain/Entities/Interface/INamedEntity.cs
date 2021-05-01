@@ -1,4 +1,4 @@
-﻿namespace WebStoreDomain.Entities.Interface
+﻿namespace WebStore.Domain.Entities.Interface
 {
     interface INamedEntity : IEntity
     {

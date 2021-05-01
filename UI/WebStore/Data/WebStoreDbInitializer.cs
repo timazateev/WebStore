@@ -5,8 +5,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
-using WebStoreDomain;
-using WebStoreDomain.Entities.Identity;
+using WebStore.Domain;
+using WebStore.Domain.Entities.Identity;
 
 namespace WebStore.Data
 {

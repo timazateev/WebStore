@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebStoreDomain.Entities.Interface;
+using WebStore.Domain.Entities.Interface;
 
-namespace WebStoreDomain.Entities.Base
+namespace WebStore.Domain.Entities.Base
 {
     public abstract class NamedEntity : Entity, INamedEntity
     { 

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Infrastructure.Mapping;
 using WebStore.Infrastructure.Services.Interfaces;
-using WebStore.ViewModels;
-using WebStoreDomain;
+using WebStore.Domain.ViewModels;
+using WebStore.Domain;
 
 namespace WebStore.Controllers
 {

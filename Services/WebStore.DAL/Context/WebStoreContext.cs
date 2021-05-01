@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebStoreDomain.Entities;
-using WebStoreDomain.Entities.Identity;
-using WebStoreDomain.Entities.Orders;
+using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.Entities.Orders;
 
 namespace WebStore.DAL.Context
 {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.ViewModels;
-using WebStoreDomain.Entities.Orders;
+using WebStore.Domain.ViewModels;
+using WebStore.Domain.Entities.Orders;
 
 namespace WebStore.Infrastructure.Services.Interfaces
 {

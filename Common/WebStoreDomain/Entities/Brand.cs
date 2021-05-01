@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebStoreDomain.Entities.Base;
-using WebStoreDomain.Entities.Interface;
+using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Interface;
 
-namespace WebStoreDomain.Entities
+namespace WebStore.Domain.Entities
 {
     [Table("Brands")]
     public class Brand : NamedEntity, IOrderedEntity

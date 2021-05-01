@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{60
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E617931A-538D-4F2A-8848-8E10D96819EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStoreDomain", "Common\WebStoreDomain\WebStoreDomain.csproj", "{81C05A8E-6A73-40BC-AF27-00DD97D8C80E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Domain", "Common\WebStoreDomain\WebStore.Domain.csproj", "{81C05A8E-6A73-40BC-AF27-00DD97D8C80E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.DAL", "Services\WebStore.DAL\WebStore.DAL.csproj", "{0DB565AF-8976-45B5-842F-A87BDF8F3293}"
 EndProject

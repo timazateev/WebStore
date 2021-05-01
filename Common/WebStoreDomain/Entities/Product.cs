@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebStoreDomain.Entities.Base;
-using WebStoreDomain.Entities.Interface;
+using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Interface;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebStoreDomain.Entities
+namespace WebStore.Domain.Entities
 {
     [Table("Products")]
     public class Product : NamedEntity, IOrderedEntity

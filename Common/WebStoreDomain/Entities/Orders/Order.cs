@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebStoreDomain.Entities.Base;
-using WebStoreDomain.Entities.Identity;
+using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStoreDomain.Entities.Orders
+namespace WebStore.Domain.Entities.Orders
 {
     public class Order : NamedEntity
     {

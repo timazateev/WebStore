@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.ViewModels;
-using WebStoreDomain.Entities;
+using WebStore.Domain.ViewModels;
+using WebStore.Domain.Entities;
 
 namespace WebStore.Infrastructure.Mapping
 {

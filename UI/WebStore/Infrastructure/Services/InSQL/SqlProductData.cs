@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using WebStore.DAL.Context;
 using WebStore.Infrastructure.Services.Interfaces;
-using WebStoreDomain;
-using WebStoreDomain.Entities;
+using WebStore.Domain;
+using WebStore.Domain.Entities;
 
 namespace WebStore.Infrastructure.Services.InSQL
 {

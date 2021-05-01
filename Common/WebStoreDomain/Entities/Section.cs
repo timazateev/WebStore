@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using WebStoreDomain.Entities.Base;
-using WebStoreDomain.Entities.Interface;
+using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Interface;
 
-namespace WebStoreDomain.Entities
+namespace WebStore.Domain.Entities
 {
     [Table("Sections")]
     public class Section : NamedEntity, IOrderedEntity

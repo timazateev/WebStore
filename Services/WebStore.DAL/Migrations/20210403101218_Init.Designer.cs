@@ -21,7 +21,7 @@ namespace WebStore.DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("WebStoreDomain.Entities.Brand", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Brand", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace WebStore.DAL.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("WebStoreDomain.Entities.Product", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Product", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace WebStore.DAL.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("WebStoreDomain.Entities.Section", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Section", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -99,13 +99,13 @@ namespace WebStore.DAL.Migrations
                     b.ToTable("Sections");
                 });
 
-            modelBuilder.Entity("WebStoreDomain.Entities.Product", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("WebStoreDomain.Entities.Brand", "Brand")
+                    b.HasOne("WebStore.Domain.Entities.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId");
 
-                    b.HasOne("WebStoreDomain.Entities.Section", "Section")
+                    b.HasOne("WebStore.Domain.Entities.Section", "Section")
                         .WithMany("Products")
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -116,21 +116,21 @@ namespace WebStore.DAL.Migrations
                     b.Navigation("Section");
                 });
 
-            modelBuilder.Entity("WebStoreDomain.Entities.Section", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Section", b =>
                 {
-                    b.HasOne("WebStoreDomain.Entities.Section", "Parent")
+                    b.HasOne("WebStore.Domain.Entities.Section", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("WebStoreDomain.Entities.Brand", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("WebStoreDomain.Entities.Section", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Section", b =>
                 {
                     b.Navigation("Products");
                 });

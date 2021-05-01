@@ -6,9 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Infrastructure.Services.Interfaces;
-using WebStore.ViewModels;
-using WebStoreDomain.Entities.Identity;
-using WebStoreDomain.Entities.Orders;
+using WebStore.Domain.ViewModels;
+using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.Entities.Orders;
 
 namespace WebStore.Infrastructure.Services.InSQL
 {
