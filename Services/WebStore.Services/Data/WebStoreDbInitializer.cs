@@ -5,10 +5,11 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
+using WebStore.Services.Data;
 using WebStore.Domain;
 using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Data
+namespace WebStore.Services.Data
 {
     public class WebStoreDbInitializer
     {
@@ -178,8 +179,8 @@ namespace WebStore.Data
                 else
                 {
                     var errors = creation_result.Errors.Select(e => e.Description);
-                    _Logger.LogError("User administratoir created with error {0}", String.Join(",", errors));
-                    throw new InvalidOperationException($"Error during administrator user creation: {String.Join(",", errors)}");
+                    _Logger.LogError("User administratoir created with error {0}", string.Join(",", errors));
+                    throw new InvalidOperationException($"Error during administrator user creation: {string.Join(",", errors)}");
 
                 }
             }

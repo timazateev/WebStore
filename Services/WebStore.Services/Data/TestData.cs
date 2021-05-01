@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebStore.Models;
 using WebStore.Domain.Entities;
 
-namespace WebStore.Data
+namespace WebStore.Services.Data
 {
     internal static class TestData
     {

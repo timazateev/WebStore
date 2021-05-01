@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.Data;
+using WebStore.Services.Data;
 using WebStore.Infrastructure.Services.Interfaces;
 using WebStore.Models;
 using WebStore.Domain.ViewModels;
