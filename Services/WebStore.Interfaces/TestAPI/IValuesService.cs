@@ -4,7 +4,7 @@ using System.Net;
 
 namespace WebStore.Interfaces.TestAPI
 {
-    interface IValuesService
+    public interface IValuesService
     {
         IEnumerable<string> Get();
 
@@ -14,6 +14,6 @@ namespace WebStore.Interfaces.TestAPI
 
         HttpStatusCode Edit(int id, string value);
 
-        HttpStatusCode Remove(int id);
+        bool Remove(int id);
     }
 }

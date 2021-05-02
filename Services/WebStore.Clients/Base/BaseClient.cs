@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 
 namespace WebStore.Clients.Base
 {
-    abstract class BaseClient
+    public abstract class BaseClient
     {
         protected string Address { get; }
 
