@@ -1,11 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using WebStore.DAL.Context;
+using WebStore.Domain.Entities.Identity;
+using WebStore.Infrastructure.Services.InMemory;
+using WebStore.Infrastructure.Services.InSQL;
+using WebStore.Infrastructure.Services.Interfaces;
+using WebStore.Services.Data;
 
 namespace WebStore.ServiceHosting
 {
@@ -24,6 +31,32 @@ namespace WebStore.ServiceHosting
             //.EnableSensitiveDataLogging(true) // for debugging 
             //.LogTo(Console.WriteLine)    
     );
+            services.AddTransient<WebStoreDbInitializer>();
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebStoreContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(opt =>
+            {
+#if DEBUG
+                opt.Password.RequiredLength = 3;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredUniqueChars = 3;
+#endif
+                opt.User.RequireUniqueEmail = false;
+                opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                opt.Lockout.AllowedForNewUsers = false;
+                opt.Lockout.MaxFailedAccessAttempts = 10;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            });
+
+            services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<IOrderService, SqlOrderService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
