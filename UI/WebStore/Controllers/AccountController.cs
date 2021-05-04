@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.ViewModels;
 using WebStore.Domain.Entities.Identity;
-using WebStore.Domain.ViewModels;
 
 namespace WebStore.Controllers
 {
@@ -32,8 +31,7 @@ namespace WebStore.Controllers
         public IActionResult Register() => View(new RegisterUserViewModel());
 
         [AllowAnonymous]
-        [Http
-            , ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel Model)
         {
             if (!ModelState.IsValid) return View(Model);
