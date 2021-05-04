@@ -13,7 +13,7 @@ using WebStore.Models;
 
 namespace WebStore.Clients.Employees
 {
-    class EmployeesClient : BaseClient, IEmployeesData
+    public class EmployeesClient : BaseClient, IEmployeesData
     {
         private readonly ILogger<EmployeesClient> _Logger;
 

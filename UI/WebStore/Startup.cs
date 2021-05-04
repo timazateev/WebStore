@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using WebStore.DAL.Context;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Services.Interfaces;
-using WebStore.Infrastructure.Services.InMemory;
+using WebStore.Clients;
 using WebStore.Infrastructure.Services.InSQL;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +17,8 @@ using WebStore.Infrastructure.Services.InCookies;
 using WebStore.Services.Data;
 using WebStore.Interfaces.TestAPI;
 using WebStore.Clients.Values;
+using WebStore.Clients.Employees;
+//using WebStore.Infrastructure.Services.InMemory;
 
 namespace WebStore
 {
@@ -29,7 +31,6 @@ namespace WebStore
         //}
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddTransient<IEmployeesData, InMemoryEmployeesData>();
             services.AddTransient<IEmployeesData, EmployeesClient>();
             //services.AddTransient<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
