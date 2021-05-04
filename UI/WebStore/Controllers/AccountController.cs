@@ -32,7 +32,8 @@ namespace WebStore.Controllers
         public IActionResult Register() => View(new RegisterUserViewModel());
 
         [AllowAnonymous]
-        [HttpPost, ValidateAntiForgeryToken]
+        [Http
+            , ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel Model)
         {
             if (!ModelState.IsValid) return View(Model);
