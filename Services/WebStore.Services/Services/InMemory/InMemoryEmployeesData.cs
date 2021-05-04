@@ -8,11 +8,11 @@ using WebStore.Models;
 
 namespace WebStore.Infrastructure.Services.InMemory
 {
-    public class InMemoryEmployeesData : IEmployeesData
+    public class EmployeesClient : IEmployeesData
     {
         private readonly List<Employee> _Employees;
         private int _CurrentMaxId;
-        public InMemoryEmployeesData()
+        public EmployeesClient()
         {
             _Employees = TestData.Employees;
             _CurrentMaxId = _Employees.DefaultIfEmpty().Max(e => e?.id ?? 1);
