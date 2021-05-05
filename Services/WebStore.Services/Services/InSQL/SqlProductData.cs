@@ -5,6 +5,8 @@ using WebStore.DAL.Context;
 using WebStore.Infrastructure.Services.Interfaces;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
+using WebStore.Domain.DTO;
+using WebStore.Infrastructure.Mapping;
 
 namespace WebStore.Infrastructure.Services.InSQL
 {
@@ -13,15 +15,18 @@ namespace WebStore.Infrastructure.Services.InSQL
         private readonly WebStoreContext _db;
 
         public SqlProductData(WebStoreContext db) { _db = db; }
+        
+        public IEnumerable<SectionDTO> GetSections() => _db.Sections.Include(s => s.Products).ToDTO();
 
-        public IEnumerable<Brand> GetBrands() => _db.Brands.Include(s => s.Products);
+        public IEnumerable<BrandDTO> GetBrands() => _db.Brands.Include(s => s.Products).ToDTO();
 
-        public Product GetProductById(int id) => _db.Products
+        public ProductDTO GetProductById(int id) => _db.Products
             .Include(p => p.Section)
             .Include(p => p.Brand)
-            .FirstOrDefault(p => p.id == id);
+            .FirstOrDefault(p => p.id == id)
+            .ToDTO();
 
-        public IEnumerable<Product> GetProducts(ProductFilter Filter = null)
+        public IEnumerable<ProductDTO> GetProducts(ProductFilter Filter = null)
         {
             IQueryable<Product> query = _db.Products
             .Include(p => p.Section)
@@ -41,9 +46,8 @@ namespace WebStore.Infrastructure.Services.InSQL
 
             }
 
-            return query;
+            return query.AsEnumerable().ToDTO();
         }
 
-        public IEnumerable<Section> GetSections() => _db.Sections.Include(s => s.Products);
     }
 }
