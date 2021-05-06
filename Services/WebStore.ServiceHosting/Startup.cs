@@ -12,6 +12,7 @@ using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Services.InMemory;
 using WebStore.Infrastructure.Services.InSQL;
 using WebStore.Infrastructure.Services.Interfaces;
+using WebStore.Interfaces.Services;
 using WebStore.Services.Data;
 
 namespace WebStore.ServiceHosting

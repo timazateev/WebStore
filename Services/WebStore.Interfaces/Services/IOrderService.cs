@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WebStore.Domain.DTO;
 
-namespace WebStore.Infrastructure.Services.Interfaces
+namespace WebStore.Interfaces.Services
 {
     public interface IOrderService
     {

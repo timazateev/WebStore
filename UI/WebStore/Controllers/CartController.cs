@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.DTO;
 using WebStore.Domain.ViewModels;
 using WebStore.Infrastructure.Services.Interfaces;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {

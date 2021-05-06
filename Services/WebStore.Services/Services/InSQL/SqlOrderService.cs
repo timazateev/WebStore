@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
-using WebStore.Infrastructure.Services.Interfaces;
 using WebStore.Domain.ViewModels;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Entities.Orders;
 using WebStore.Domain.DTO;
 using WebStore.Services.Mapping;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Infrastructure.Services.InSQL
 {

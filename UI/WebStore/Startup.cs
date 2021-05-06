@@ -19,6 +19,7 @@ using WebStore.Interfaces.TestAPI;
 using WebStore.Clients.Values;
 using WebStore.Clients.Employees;
 using WebStore.Clients.Products;
+using WebStore.Interfaces.Services;
 //using WebStore.Infrastructure.Services.InMemory;
 
 namespace WebStore
