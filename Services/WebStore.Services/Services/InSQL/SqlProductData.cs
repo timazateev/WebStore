@@ -49,5 +49,14 @@ namespace WebStore.Infrastructure.Services.InSQL
             return query.AsEnumerable().ToDTO();
         }
 
+        public SectionDTO GetSectionbyId(int id) => _db.Sections
+            .Include(s => s.Products)
+            .FirstOrDefault(s => s.id == id)
+            .ToDTO();
+
+        public BrandDTO GetSBrandbyId(int id) => _db.Brands
+            .Include(b => b.Products)
+            .FirstOrDefault(b => b.id == id)
+            .ToDTO();
     }
 }
