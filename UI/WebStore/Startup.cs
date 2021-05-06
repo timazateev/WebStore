@@ -20,6 +20,7 @@ using WebStore.Clients.Values;
 using WebStore.Clients.Employees;
 using WebStore.Clients.Products;
 using WebStore.Interfaces.Services;
+using WebStore.Clients.Orders;
 //using WebStore.Infrastructure.Services.InMemory;
 
 namespace WebStore
@@ -37,8 +38,10 @@ namespace WebStore
             //services.AddTransient<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<ICartServices, InCookiesCartService>();
-            services.AddScoped<IOrderService, SqlOrderService>();
+            //services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<IOrderService, OrdersClient>();
             services.AddScoped<IValuesService, ValuesClient>();
+
 
             services.AddDbContext<WebStoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
