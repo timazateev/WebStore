@@ -50,7 +50,7 @@ namespace WebStore.Services.Data
             }
             catch (Exception e)
             {
-                _Logger.LogError("An error occured in during products initializing in Database");
+                _Logger.LogError($"An error occured in during products initializing in Database {e}");
             }
             _Logger.LogInformation("DB Initialized");
 
@@ -61,7 +61,7 @@ namespace WebStore.Services.Data
             }
             catch (Exception e)
             {
-                _Logger.LogError("An error occured in during products initializing in Database");
+                _Logger.LogError($"An error occured in during products initializing in Database {e}");
             }
             _Logger.LogInformation("DB Initialized");
 
