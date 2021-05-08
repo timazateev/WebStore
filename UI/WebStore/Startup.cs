@@ -21,6 +21,7 @@ using WebStore.Clients.Employees;
 using WebStore.Clients.Products;
 using WebStore.Interfaces.Services;
 using WebStore.Clients.Orders;
+using WebStore.Clients.Identity;
 //using WebStore.Infrastructure.Services.InMemory;
 
 namespace WebStore
@@ -52,8 +53,23 @@ namespace WebStore
             services.AddTransient<WebStoreDbInitializer>();
 
             services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<WebStoreContext>()
+                //.AddEntityFrameworkStores<WebStoreContext>()
                 .AddDefaultTokenProviders();
+
+            #region Identity stores custom implementations
+
+            services.AddTransient<IUserStore<User>, UsersClient>();
+            services.AddTransient<IUserRoleStore<User>, UsersClient>();
+            services.AddTransient<IUserPasswordStore<User>, UsersClient>();
+            services.AddTransient<IUserEmailStore<User>, UsersClient>();
+            services.AddTransient<IUserPhoneNumberStore<User>, UsersClient>();
+            services.AddTransient<IUserTwoFactorStore<User>, UsersClient>();
+            services.AddTransient<IUserClaimStore<User>, UsersClient>();
+            services.AddTransient<IUserLoginStore<User>, UsersClient>();
+
+            services.AddTransient<IRoleStore<Role>, RolesClient>();
+
+            #endregion
 
             services.Configure<IdentityOptions>(opt =>
                 {
