@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Services.InMemory;
@@ -63,6 +64,22 @@ namespace WebStore.ServiceHosting
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebStore.ServiceHosting", Version = "v1" });
+
+                const string webstore_api_xml = "WebStore.ServiceHosting.xml";
+                const string webstore_donain_xml = "WebStore.Domain.xml";
+                const string debug_path = "bin/debug/net5.0";
+
+                //c.IncludeXmlComments("WebStore.ServiceHosting.xml");
+
+                if (File.Exists(webstore_api_xml))
+                    c.IncludeXmlComments(webstore_api_xml);
+                else if(File.Exists(Path.Combine(debug_path, webstore_api_xml)))
+                    c.IncludeXmlComments(Path.Combine(debug_path, webstore_api_xml));
+
+                if (File.Exists(webstore_donain_xml))
+                    c.IncludeXmlComments(webstore_donain_xml);
+                else if (File.Exists(Path.Combine(debug_path, webstore_donain_xml)))
+                    c.IncludeXmlComments(Path.Combine(debug_path, webstore_donain_xml));
             });
         }
 

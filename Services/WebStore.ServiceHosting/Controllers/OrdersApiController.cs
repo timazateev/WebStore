@@ -7,6 +7,9 @@ using WebStore.Interfaces.Services;
 
 namespace WebStore.ServiceHosting.Controllers
 {
+    ///<summary>
+    /// Order management
+    ///</summary>
     [Route(WebAPI.Orders)]
     [ApiController]
     public class OrdersApiController : ControllerBase, IOrderService
@@ -15,6 +18,10 @@ namespace WebStore.ServiceHosting.Controllers
 
         public OrdersApiController(IOrderService OrderService) => _OrderService = OrderService;
 
+
+        ///<summary> Getting all orders for the user specified </summary>
+        /// <param name="UserName"> </param>
+        /// <returns> Orders list that user done </returns>
         [HttpGet("user/{UserName}")]
         public async Task<IEnumerable<OrderDTO>> GetUserOrders(string UserName) =>
             await _OrderService.GetUserOrders(UserName);
