@@ -43,15 +43,6 @@ namespace WebStore
             services.AddScoped<IOrderService, OrdersClient>();
             services.AddScoped<IValuesService, ValuesClient>();
 
-
-            services.AddDbContext<WebStoreContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                //.EnableSensitiveDataLogging(true) // for debugging 
-                //.LogTo(Console.WriteLine)    
-                );
-
-            services.AddTransient<WebStoreDbInitializer>();
-
             services.AddIdentity<User, Role>()
                 //.AddEntityFrameworkStores<WebStoreContext>()
                 .AddDefaultTokenProviders();
@@ -114,9 +105,8 @@ namespace WebStore
                 .AddRazorRuntimeCompilation();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDbInitializer db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            db.Initialize();
 
             if (env.IsDevelopment())
             {
