@@ -22,7 +22,7 @@ namespace WebStore.Clients.Base
                 BaseAddress = new System.Uri(Configuration["WebApiURL"]),
                 DefaultRequestHeaders =
                 {
-                    Accept = { new MediaTypeWithQualityHeaderValue("application/json0") }
+                    Accept = { new MediaTypeWithQualityHeaderValue("application/json") }
                 }
             };
         }
@@ -37,6 +37,7 @@ namespace WebStore.Clients.Base
 
 
         protected HttpResponseMessage Post<T>(string url, T item) => PostAsync(url, item).Result;
+        
         protected async Task<HttpResponseMessage> PostAsync<T>(string url, T item, CancellationToken Cancel = default)
         {
             var response = await Http.PostAsJsonAsync(url, item, Cancel);

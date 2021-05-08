@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.DTO.Identity;
@@ -108,7 +109,12 @@ namespace WebStore.ServiceHosting.Controllers.Identity
         public async Task<IList<User>> GetUsersInRoleAsync(string role) => await _UserStore.GetUsersInRoleAsync(role);
 
         [HttpPost("GetPasswordHash")]
-        public async Task<string> GetPasswordHashAsync([FromBody] User user) => await _UserStore.GetPasswordHashAsync(user);
+        //public async Task<string> GetPasswordHashAsync([FromBody] User user) => await _UserStore.GetPasswordHashAsync(user);
+        public async Task<string> GetPasswordHashAsync([FromBody] User user)
+        {
+            var result = await _UserStore.GetPasswordHashAsync(user);
+            return result;
+        }
 
         [HttpPost("SetPasswordHash")]
         public async Task<string> SetPasswordHashAsync([FromBody] PasswordHashDTO hash)
