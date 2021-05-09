@@ -11,6 +11,8 @@ using WebStore.Domain.Entities.Orders;
 using WebStore.Domain.DTO;
 using WebStore.Services.Mapping;
 using WebStore.Interfaces.Services;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace WebStore.Infrastructure.Services.InSQL
 {
@@ -18,11 +20,13 @@ namespace WebStore.Infrastructure.Services.InSQL
     {
         private readonly WebStoreContext _db;
         private readonly UserManager<User> _userManager;
+        private readonly ILogger<SqlOrderService> _logger;
 
-        public SqlOrderService(WebStoreContext db, UserManager<User> UserManager) 
+        public SqlOrderService(WebStoreContext db, UserManager<User> UserManager, ILogger<SqlOrderService> Logger)
         {
             _db = db;
             _userManager = UserManager;
+            _logger = Logger;
         }
 
         public async Task<IEnumerable<OrderDTO>> GetUserOrders(string UserName) => (await _db.Orders
@@ -46,9 +50,14 @@ namespace WebStore.Infrastructure.Services.InSQL
             if (user is null)
                 throw new InvalidOperationException($"User with name {UserName} not found in DB");
 
+            _logger.LogInformation("Adding new order for {0}",
+                UserName);
+
+            var timer = Stopwatch.StartNew();
+
             await using var transaction = await _db.Database.BeginTransactionAsync();
 
-            var order = new Order 
+            var order = new Order
             {
                 Name = OrderModel.Order.Name,
                 Address = OrderModel.Order.Address,
@@ -93,6 +102,8 @@ namespace WebStore.Infrastructure.Services.InSQL
             await _db.SaveChangesAsync();
 
             await transaction.CommitAsync();
+            _logger.LogInformation("The order for {0} added at {1} with id:{2} with cost {3}",
+                UserName, timer.Elapsed, order.id, order.Items.Sum(i => i.TotalItemPrice));
 
             return order.ToDTO();
         }
