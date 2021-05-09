@@ -1,20 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebStore.DAL.Context;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Services.Interfaces;
-using WebStore.Clients;
-using WebStore.Infrastructure.Services.InSQL;
 using WebStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using WebStore.Infrastructure.Services.InCookies;
-using WebStore.Services.Data;
 using WebStore.Interfaces.TestAPI;
 using WebStore.Clients.Values;
 using WebStore.Clients.Employees;
@@ -22,6 +17,8 @@ using WebStore.Clients.Products;
 using WebStore.Interfaces.Services;
 using WebStore.Clients.Orders;
 using WebStore.Clients.Identity;
+using Microsoft.Extensions.Logging;
+using WebStore.Infrastructure.Middleware;
 //using WebStore.Infrastructure.Services.InMemory;
 
 namespace WebStore
@@ -106,8 +103,9 @@ namespace WebStore
                 .AddRazorRuntimeCompilation();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory log)
         {
+            log.AddLog4Net();
 
             if (env.IsDevelopment())
             {
@@ -123,6 +121,8 @@ namespace WebStore
 
             //app.Map(); owen PO adding.
             //app.Use(); delegate or class in conveyor
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
